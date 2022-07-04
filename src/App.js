@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import './App.css';
 import AddEdit from "./pages/AddEdit";
 import  Home from "./pages/Home"
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route exact path="/" component ={Home} />
       <Route  path="/addupdate" component ={AddEdit} />
       <Route  path="/addupdate/:id" component ={AddEdit} />
+      <Route  path="/login" component ={Login} />
      </Switch>
     </div>
     </BrowserRouter>

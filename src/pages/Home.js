@@ -27,7 +27,9 @@ const deleteContact= async (id) =>{
     <Link to="/addupdate">
     <button className="btn btn-contact">Add Contact</button>
     </Link>
-    
+    <Link to="/login">
+    <button className="btn btn-contact">login</button>
+    </Link>
     <table className=" styled-table">
      <thead>
      <tr>
