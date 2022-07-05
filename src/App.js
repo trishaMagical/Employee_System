@@ -6,6 +6,7 @@ import AddEdit from "./pages/AddEdit";
 import  Home from "./pages/Home"
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route  path="/addupdate" component ={AddEdit} />
       <Route  path="/addupdate/:id" component ={AddEdit} />
       <Route  path="/login" component ={Login} />
+      <Route  path="/SignUp" component ={SignUp} />
      </Switch>
     </div>
     </BrowserRouter>
