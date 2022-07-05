@@ -5,6 +5,7 @@ import './App.css';
 import AddEdit from "./pages/AddEdit";
 import  Home from "./pages/Home"
 import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
     <div className="App">
       <ToastContainer position="top-center"/>
      <Switch>
-      <Route exact path="/" component ={Home} />
+     <Route exact path="/" component ={Registration} />
+      <Route path="/home" component ={Home} />
       <Route  path="/addupdate" component ={AddEdit} />
       <Route  path="/addupdate/:id" component ={AddEdit} />
       <Route  path="/login" component ={Login} />
