@@ -24,9 +24,9 @@ const deleteContact= async (id) =>{
 }
   return (
     <div style={{marginTop:"150px",marginLeft:"100px"}}>
-    <Link to="/addupdate">
+    {/* <Link to="/addupdate">
     <button className="btn btn-contact">Add Contact</button>
-    </Link>
+    </Link> */}
     
     <table className=" styled-table">
      <thead>
@@ -36,6 +36,8 @@ const deleteContact= async (id) =>{
               <th style={{textAlign:"right"}}>Address</th>
               <th style={{textAlign:"right"}}>Contact</th>
               <th style={{textAlign:"right"}}>Job_Role</th>
+              <th style={{textAlign:"right"}}>Email</th>
+              <th style={{textAlign:"right"}}>Password</th>
               <th style={{textAlign:"center"}}>Actions</th>
       </tr>
      </thead>
@@ -45,10 +47,12 @@ const deleteContact= async (id) =>{
           return(
               <tr key ={item.id}>
                   <th scope="row">{item.id}</th>
-                  <td>{item.First_Name}</td>
-                  <td>{item.Address}</td>
-                  <td>{item.Contact}</td>
-                  <td>{item.Job_Role}</td>
+                  <td>{item.first_name}</td>
+                  <td>{item.address}</td>
+                  <td>{item.contact}</td>
+                  <td>{item.job_role}</td>
+                  <td>{item.email}</td>
+                  <td>{item.password}</td>
 <td>
   <Link to ={`/addupdate/${item.id}`}>
       <button className="btn btn-edit">Edit</button>

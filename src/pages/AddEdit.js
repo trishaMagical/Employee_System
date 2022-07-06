@@ -39,13 +39,15 @@ const AddEdit = (props) => {
                 console.log("id", id);
                  axios.get (`http://localhost:5000/api/get/${id}`)
                 .then (res =>{
+                    console.log("res",res.data[0]);
                    const obj =
                    {
-                    first_name :res.data[0].First_Name, 
-                    contact:res.data[0].Contact,
-                    address:res.data[0].Address,
-                    job_role:res.data[0].Job_Role,
+                    first_name :res.data[0].first_name, 
+                    contact:res.data[0].contact,
+                    address:res.data[0].address,
+                    job_role:res.data[0].job_role,
                    }
+                  
                     setState(obj);
                     setis_Update(true);
                     console.log("Hello",res.data[0],state);
