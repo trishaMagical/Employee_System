@@ -11,11 +11,12 @@ const Login = () => {
     const[email, setEmail] = useState("");
     const[password,setPassword] =useState("");
     const[first_Name, setfirst_name]= useState("");
+    
 const loginSubmit = async(e) =>{
     e.preventDefault();
-       
+     console.log("");
     axios
-    .get("http://localhost:5000/api/login/trisha.hazra@gmail.com/12345678")
+    .get(`http://localhost:5000/api/login/${email}/${password}`)
     .then(res=>{
     console.log(res.data[0].email);
     console.log(res.data[0].first_name);
@@ -44,6 +45,8 @@ const loginSubmit = async(e) =>{
         type="email"
         id="email"
         name="email"
+        value={email}
+        onChange={(e)=>setEmail(e.target.value)}
         placeholder="Your Email Id"
        />
        <br/>
@@ -52,6 +55,8 @@ const loginSubmit = async(e) =>{
         type="text"
         id="password"
         name="password"
+        value={password}
+        onChange={(e)=>setPassword(e.target.value)}
         placeholder="Your Password"
       
         

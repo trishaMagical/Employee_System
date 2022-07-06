@@ -98,7 +98,7 @@ const SignUp = (props) => {
                 await axios.post(`http://localhost:5000/edit/${ids}`, 
                 state
             ).then(()=>{
-                setState({first_name:"",contact:"",address:"",job_role:""})
+                setState({first_name:"",contact:"",address:"",job_role:"", email:"",password:""})
                 
             }).catch((err)=> toast.error(err.response.data))
             

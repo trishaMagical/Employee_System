@@ -10,6 +10,8 @@ const initialState ={
     contact:"",
     address:"",
     job_role:"",
+    email:"",
+    password:""
 
 }
 const AddEdit = (props) => {
@@ -20,7 +22,7 @@ const AddEdit = (props) => {
 
     const [ids, setIds]= useState("");
 
-    const {first_name,contact,address,job_role} = state;
+    const {first_name,contact,address,job_role,email,password} = state;
     
     const history = useHistory();
 
@@ -46,6 +48,8 @@ const AddEdit = (props) => {
                     contact:res.data[0].contact,
                     address:res.data[0].address,
                     job_role:res.data[0].job_role,
+                    email:res.data[0].email,
+                    password:res.data[0].password,
                    }
                   
                     setState(obj);
@@ -76,9 +80,9 @@ const AddEdit = (props) => {
 
     const handleSubmit = async (e) =>{
         console.log("Hi");
-        console.log(first_name,contact,address,job_role);
+        console.log(first_name,contact,address,job_role,email,password);
         e.preventDefault();
-        if(!first_name || !contact || !address || !job_role){
+        if(!first_name || !contact || !address || !job_role || !email || !password){
             toast.error("Please fill the form");
 
         } else {
@@ -88,15 +92,15 @@ const AddEdit = (props) => {
                 await axios.post("http://localhost:5000/api/addNew", 
                 state
             ).then(()=>{
-                setState({first_name:"",contact:"",address:"",job_role:""})
+                setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
                 
             }).catch((err)=> toast.error(err.response.data))
            
             } else{
                 await axios.post(`http://localhost:5000/edit/${ids}`, 
-                state
+                {"first_name":first_name,"contact":contact,"address":address,"job_role":job_role,"email":email,"password":password}
             ).then(()=>{
-                setState({first_name:"",contact:"",address:"",job_role:""})
+                setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
                 
             }).catch((err)=> toast.error(err.response.data))
             
@@ -136,6 +140,21 @@ const AddEdit = (props) => {
         // console.log("Job_Role", job_role);
         setState(temp);
     }
+    const handleInputChangeforEmail = (e) =>{
+        const temp = {...state}
+        temp.email = e.target.value;
+        // const job_role = e.target.value;
+        // console.log("Job_Role", job_role);
+        setState(temp);
+    }
+    const handleInputChangeforPassword = (e) =>{
+        const temp = {...state}
+        temp.password = e.target.value;
+        // const job_role = e.target.value;
+        // console.log("Job_Role", job_role);
+        setState(temp);
+    }
+
 
   return (
     <div style={{marginTop: "100px"}}>
@@ -183,6 +202,24 @@ const AddEdit = (props) => {
         placeholder="Your Job_Role...."
         value={job_role || ""}
         onChange={handleInputChangeforJob_role}
+        />
+          <label htmlFor="email">Email</label>
+        <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="abc@example.com...."
+        value={email || ""}
+        onChange={handleInputChangeforEmail}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+        type="text"
+        id="password"
+        name="password"
+        placeholder="********...."
+        value={password || ""}
+        onChange={handleInputChangeforPassword}
         />
         <input type="submit" value="Save"/>
         <Link to ="/">
