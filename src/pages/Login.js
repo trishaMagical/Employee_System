@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 
 import "./Login.css";
 import axios from 'axios';
@@ -14,7 +14,7 @@ const Login = () => {
     
 const loginSubmit = async(e) =>{
     e.preventDefault();
-     console.log("");
+     
     axios
     .get(`http://localhost:5000/api/login/${email}/${password}`)
     .then(res=>{

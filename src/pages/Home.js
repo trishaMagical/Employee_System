@@ -7,7 +7,9 @@ const Home = () => {
 const [data, setData] = useState([]);
 
 const loadData = async () => {
-    const response = await axios.get ("http://localhost:5000/api/get");
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    console.log("userInfo",userInfo);
+    const response = await axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}` );
     setData(response.data);
 console.log("Data",response.data );
 };
