@@ -10,7 +10,7 @@ const Login = () => {
     
     const[email, setEmail] = useState("");
     const[password,setPassword] =useState("");
-    const[first_Name, setfirst_name]= useState("");
+    // const[first_Name, setfirst_name]= useState("");
     
 const loginSubmit = async(e) =>{
     e.preventDefault();
