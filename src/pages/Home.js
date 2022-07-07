@@ -6,22 +6,30 @@ import { toast } from 'react-toastify';
 const Home = () => {
 const [data, setData] = useState([]);
 
-const loadData = async () => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("userInfo",userInfo);
-    const response = await axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}` );
-    setData(response.data);
-console.log("Data",response.data );
-};
+// const loadData = async () => {
+//     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+//     console.log("userInfo",userInfo);
+//     const response = await axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}` );
+//     setData(response.data);
+// console.log("Data",response.data );
+
+//};
 useEffect(()=>{
- loadData();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  console.log("userInfo",userInfo);
+  const response = axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}`)
+  .then(response=>{
+    setData(response.data);
+  })
+  .catch((err)=> toast.error(err.response.data))
+
 } ,[]);
 const deleteContact= async (id) =>{
   if(window.confirm("delete this contact?")){
     console.log("id",id);
    await axios.get(`http://localhost:5000/api/remove/${id}`);
     toast.success("deleted successfully");
-    setTimeout(()=>loadData(),500);
+    // setTimeout(()=>loadData(),500);
   }
 }
   return (
@@ -56,9 +64,9 @@ const deleteContact= async (id) =>{
                   <td>{item.email}</td>
                   <td>{item.password}</td>
 <td>
-  <Link to ={`/addupdate/${item.id}`}>
+  <a href={`/addupdate/${item.id}`}>
       <button className="btn btn-edit">Edit</button>
-  </Link>
+  </a>
   
       <button className="btn btn-delete" onClick={()=> deleteContact(item.id)}>Delete</button>
   

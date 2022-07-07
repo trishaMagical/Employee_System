@@ -105,9 +105,9 @@ const AddEdit = (props) => {
             }).catch((err)=> toast.error(err.response.data))
             
             }
-            setTimeout(()=>{
-                history.push("/")
-                }, 500);
+            // setTimeout(()=>{
+            //     history.push("/Home")
+            //     }, 500);
         }
     }
    
@@ -222,9 +222,12 @@ const AddEdit = (props) => {
         onChange={handleInputChangeforPassword}
         />
         <input type="submit" value="Save"/>
-        <Link to ="/Home">
-            <input type="button" value="Go Back"/>
-        </Link>
+      <Link to="/Home">
+        Go Back
+      
+      </Link>
+            
+       
         </form>
         
     </div>
