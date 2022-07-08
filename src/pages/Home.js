@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import Navbar from './Navbar';
+
 const Home = () => {
   const [data, setData] = useState([]);
 
@@ -37,6 +39,7 @@ const Home = () => {
   return (
     <div className='row'>
       <div className='col' />
+      <Navbar/>
       {/* <Link to="/addupdate">
     <button className="btn btn-contact">Add Contact</button>
     </Link> */}
