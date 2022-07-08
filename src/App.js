@@ -15,12 +15,14 @@ function App() {
         {/* <ToastContainer position="top-center"/> */}
         <Switch>
           <Route exact path="/" component={Registration} />
+          <Route exact path="/SignUp" component ={SignUp} />
           <Route exact path="/login/user" component={Login} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/addupdate" component={AddEdit} />
-          <Route exact path="/addupdate/:id" component={AddEdit} />
+          <Route exact path="/SignUp" component ={SignUp} />
+          <Route exact path="/logout" component={Login} />
 
-          {/* <Route exact path="/SignUp" component ={SignUp} /> */}
+          
           <Redirect to="/Home" />
         </Switch>
       </div>

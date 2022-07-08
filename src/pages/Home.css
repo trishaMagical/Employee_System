@@ -54,3 +54,15 @@ border-bottom:2px solid #009879;
    background-color: #e82764;
    margin-top: 10px;
 }
+.button1 {
+   background-color: red;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+}
