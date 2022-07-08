@@ -17,12 +17,14 @@ const [data, setData] = useState([]);
 useEffect(()=>{
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   console.log("userInfo",userInfo);
-  const response = axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}`)
+   axios.get (`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}`)
   .then(response=>{
+    console.log("Response",`http://localhost:5000/api/get/${userInfo.email}/${userInfo.first_name}/${userInfo.job_role}`);
     setData(response.data);
+
   })
   .catch((err)=> toast.error(err.response.data))
-
+console.log("Hello TRISHAAAA");
 } ,[]);
 const deleteContact= async (id) =>{
   if(window.confirm("delete this contact?")){
@@ -33,7 +35,8 @@ const deleteContact= async (id) =>{
   }
 }
   return (
-    <div style={{marginTop:"150px",marginLeft:"100px"}}>
+    <div className='row'>
+      <div className='col' />
     {/* <Link to="/addupdate">
     <button className="btn btn-contact">Add Contact</button>
     </Link> */}

@@ -79,20 +79,23 @@ const AddEdit = (props) => {
     },0)
 
     const handleSubmit = async (e) =>{
-        console.log("Hi");
-        console.log(first_name,contact,address,job_role,email,password);
+        // console.log("Hi");
+        // console.log(first_name,contact,address,job_role,email,password);
         e.preventDefault();
         if(!first_name || !contact || !address || !job_role || !email || !password){
             toast.error("Please fill the form");
 
         } else {
-            console.log("Hi2",is_Update);
+            // console.log("Hi2",is_Update);
             if (is_Update=== false){
                 
                 await axios.post("http://localhost:5000/api/addNew", 
                 state
             ).then(()=>{
-                setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
+                localStorage.setItem("userInfo",JSON.stringify({email:state.email,first_name:state.first_name,job_role:state.job_role}));
+                alert("Succes");
+                window.location="/Home"
+                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
                 
             }).catch((err)=> toast.error(err.response.data))
            
@@ -100,14 +103,15 @@ const AddEdit = (props) => {
                 await axios.post(`http://localhost:5000/edit/${ids}`, 
                 {"first_name":first_name,"contact":contact,"address":address,"job_role":job_role,"email":email,"password":password}
             ).then(()=>{
-                setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
+                localStorage.setItem("userInfo",JSON.stringify({email:email,first_name:first_name,job_role:job_role}));
+                alert("Succesfull");
+                window.location="/Home"
+                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
                 
             }).catch((err)=> toast.error(err.response.data))
             
             }
-            // setTimeout(()=>{
-            //     history.push("/Home")
-            //     }, 500);
+           
         }
     }
    
@@ -224,7 +228,6 @@ const AddEdit = (props) => {
         <input type="submit" value="Save"/>
       <Link to="/Home">
         Go Back
-      
       </Link>
             
        
