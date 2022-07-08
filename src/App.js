@@ -12,6 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+      
         {/* <ToastContainer position="top-center"/> */}
         <Switch>
           <Route exact path="/" component={Registration} />
