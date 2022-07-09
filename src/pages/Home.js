@@ -1,9 +1,10 @@
 import React, { userState, useEffect, useState } from 'react'
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./Home.css";
 import { toast } from 'react-toastify';
 import axios from "axios";
-import Navbar from './Navbar';
+import "./Home.css"
+
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -37,58 +38,95 @@ const Home = () => {
     }
   }
   return (
-    <div className='row'>
-      <div className='col' />
-      <Navbar/>
-      {/* <Link to="/addupdate">
-    <button className="btn btn-contact">Add Contact</button>
-    </Link> */}
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+        <a className="navbar-brand text-white" href="/Home">Welcome</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link text-white" to="/Home">Home </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-white" href="/TodoList">Todo's</a>
+            </li>
 
-      <table className=" styled-table">
-        <thead>
-          <tr>
-            <th style={{ textAlign: "right" }}>id</th>
-            <th style={{ textAlign: "right" }}>First_Name</th>
-            <th style={{ textAlign: "right" }}>Address</th>
-            <th style={{ textAlign: "right" }}>Contact</th>
-            <th style={{ textAlign: "right" }}>Job_Role</th>
-            <th style={{ textAlign: "right" }}>Email</th>
-            <th style={{ textAlign: "right" }}>Password</th>
-            <th style={{ textAlign: "center" }}>Actions</th>
-          </tr>
-        </thead>
+          </ul>
+        </div>
+      </nav>
+      <div className='row'>
 
-        <tbody>
-          {data.map((item, id) => {
-            return (
-              <tr key={item.id}>
-                <th scope="row">{item.id}</th>
-                <td>{item.first_name}</td>
-                <td>{item.address}</td>
-                <td>{item.contact}</td>
-                <td>{item.job_role}</td>
-                <td>{item.email}</td>
-                <td>{item.password}</td>
-                <td>
-                  <a href={`/addupdate/${item.id}`}>
-                    <button className="btn btn-edit">Edit</button>
-                  </a>
+        {/* <div className="col-3"  >
+          <div className='row'>
+            <div style={{ backgroundColor: "blue", color: "white" }} className="col-12 border p-2">Home</div>
+          </div>
+          <div className='row'>
+            <div className="col-12 border p-2">Show The Tode List</div>
+          </div>
+          <div className='row'>
+            <div className="col-12 border p-2">Todo3</div>
+          </div>
 
-                  <button className="btn btn-delete" onClick={() => deleteContact(item.id)}>Delete</button>
 
-      <Link to ="/logout">
-      <button className="btn btn-view">Log Out</button>
-  </Link> 
-  
+        </div> */}
+        <div className="col-12" >
 
-                </td>
+          <table className=" styled-table">
+            <thead>
+              <tr>
+                <th style={{ textAlign: "right" }}>id</th>
+                <th style={{ textAlign: "right" }}>First_Name</th>
+                <th style={{ textAlign: "right" }}>Address</th>
+                <th style={{ textAlign: "right" }}>Contact</th>
+                <th style={{ textAlign: "right" }}>Job_Role</th>
+                <th style={{ textAlign: "right" }}>Email</th>
+                <th style={{ textAlign: "right" }}>Password</th>
+                <th style={{ textAlign: "center" }}>Actions</th>
               </tr>
-            )
-          }
-          )}
-        </tbody>
-      </table>
+            </thead>
+
+            <tbody>
+              {data.map((item, id) => {
+                return (
+                  <tr key={item.id}>
+                    <th scope="row">{item.id}</th>
+                    <td>{item.first_name}</td>
+                    <td>{item.address}</td>
+                    <td>{item.contact}</td>
+                    <td>{item.job_role}</td>
+                    <td>{item.email}</td>
+                    <td>{item.password}</td>
+                    <td>
+                      <a href={`/addupdate/${item.id}`}>
+                        <button className="btn btn-edit">Edit</button>
+                      </a>
+
+                      <button className="btn btn-delete" onClick={() => deleteContact(item.id)}>Delete</button>
+
+                      <Link to="/logout">
+                        <button className="btn btn-view">Log Out</button>
+                      </Link>
+
+
+                    </td>
+                  </tr>
+                )
+              }
+              )}
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+
+
     </div>
+
+
   )
 }
 
