@@ -52,7 +52,9 @@ const Home = () => {
             <li className="nav-item">
               <a className="nav-link text-white" href="/TodoList">Todo's</a>
             </li>
-
+            <li className="nav-item">
+              <a className="nav-link text-white" href="/logout">Log Out</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -105,9 +107,9 @@ const Home = () => {
 
                       <button className="btn btn-delete" onClick={() => deleteContact(item.id)}>Delete</button>
 
-                      <Link to="/logout">
+                      {/* <Link to="/logout">
                         <button className="btn btn-view">Log Out</button>
-                      </Link>
+                      </Link> */}
 
 
                     </td>
