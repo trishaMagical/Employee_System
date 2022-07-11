@@ -4,7 +4,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 import { IoIosDoneAll } from 'react-icons/io';
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+const Todo = ({ todos, removeTodo, updateTodo }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ""
@@ -42,7 +42,6 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
           onClick={() => setEdit({ id: todo.id, value: todo.text })}
           className="edit-icon"
         />
-       <IoIosDoneAll onClick={() => completeTodo(todo.id)}/>
       </div>
      
     </div>
