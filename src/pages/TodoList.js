@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
+import axios from "axios";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+  useEffect  (  ()=>{
+    const data = JSON.parse(localStorage.getItem("userInfo"));
+    console.log("data",data);
+    axios
+    .get(`http://localhost:5000/api/todoSaved/${data.email}`)
+    .then(response => {
+      console.log("response",response.data[0].todolist);
+      // console.log("response",response.data, JSON.parse(response.data));
+      setTodos(JSON.parse(response.data[0].todolist));
 
+    })
+     .catch(err=>{
+        console.log(err);
+    })
+    
+
+   
+},0)
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
