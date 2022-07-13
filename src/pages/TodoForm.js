@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from 'axios';
+
+import "./Todo.css";
+
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
 
@@ -54,11 +56,9 @@ function TodoForm(props) {
           <button onClick={handleSubmit} className="todo-button">
             Add todo
           </button>
-          <br/>
-          <br/>
-          <br/>
+          
 
-          {/* <button onClick={handleSave}>Save</button> */}
+        
         </>
       )}
     </form>

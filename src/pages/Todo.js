@@ -3,6 +3,9 @@ import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 import axios from 'axios';
+import "./Todo.css";
+
+
 // import { IoIosDoneAll } from 'react-icons/io';
 
 const Todo = ({ todos, removeTodo, updateTodo }) => {
@@ -68,8 +71,8 @@ const handleSave = async() =>{
         </React.Fragment>
       ))
     }
-
-    <button onClick={handleSave} >Save To Database</button>
+ <input type="submit" value="Save To DataBase"/>
+    {/* <button onClick={handleSave} >Save To Database</button> */}
   </div>
 
 
