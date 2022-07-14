@@ -38,7 +38,8 @@ const handleSave = async() =>{
     
     
 }
-  return <div>
+  return <form>
+    <div>
     {
       todos.map((todo, index) => (
         <React.Fragment>
@@ -70,11 +71,12 @@ const handleSave = async() =>{
           }
         </React.Fragment>
       ))
+      
     }
  <input type="submit" value="Save To DataBase"/>
-    {/* <button onClick={handleSave} >Save To Database</button> */}
+  
   </div>
-
+  </form>
 
 };
 
