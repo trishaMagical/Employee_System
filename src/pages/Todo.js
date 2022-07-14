@@ -73,7 +73,7 @@ const handleSave = async() =>{
       ))
       
     }
- <input type="submit" value="Save To DataBase"/>
+ <button onClick={handleSave}>Save To DataBase</button>
   
   </div>
   </form>
