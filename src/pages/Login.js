@@ -40,24 +40,30 @@ const loginSubmit = async(e) =>{
     }} 
     onSubmit={loginSubmit}>
     <h2>Login Page</h2>    
-    <label >Email Id:</label>
+    <label className='label-Size'><h3>Email-Id:</h3></label>
+    
         <input
+        className='inputbox-Size'
         type="email"
         id="email"
         name="email"
         value={email}
         onChange={(e)=>setEmail(e.target.value)}
-        placeholder="Your Email Id"
+        placeholder="         Your Email Id"
        />
        <br/>
-        <label >Password:</label>
+       <br/>
+       
+        <label><h3>Password:</h3></label>
+        
         <input
-        type="text"
+        className='inputbox-Size'
+        type="password"
         id="password"
         name="password"
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
-        placeholder="Your Password"
+        placeholder="        Your Password"
       
         
         />
