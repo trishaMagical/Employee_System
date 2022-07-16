@@ -32,10 +32,24 @@ function TodoList() {
     const newTodos = [todo, ...todos];
 
     setTodos(newTodos);
+    console.log("NewTodos", newTodos);
+    handleSave(newTodos);
     console.log(...todos);
-  };
 
-  const updateTodo = (todoId, newValue) => {
+  };
+const handleSave = async(newTodos) =>{
+  
+    const data = JSON.parse(localStorage.getItem("userInfo"));
+   console.log("data",data);
+    
+    axios
+    .put(`http://localhost:5000/api/todolist/${data.email}`,
+ {todolist:JSON.stringify(newTodos)},
+    )
+    
+    
+}
+  const updateTodo = async (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
@@ -43,12 +57,15 @@ function TodoList() {
     setTodos((prev) =>
       prev.map((item) => (item.id === todoId ? newValue : item))
     );
+  console.log("Todos123",todos);
+  //await handleSave();
   };
 
   const removeTodo = (id) => {
     const removedArr = [...todos].filter((todo) => todo.id !== id);
-
+    
     setTodos(removedArr);
+    handleSave(removedArr);
   };
 
   const completeTodo = (id) => {
@@ -73,11 +90,12 @@ function TodoList() {
             <li className="nav-item active">
               <a className="nav-link text-white" href="/Home">Profile </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item ">
               <a className="nav-link text-white" href="/TodoList">Todo's</a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link text-white" href="/logout">Log Out</a>
+            
+            <li className="nav-item ms-auto">
+              <a className="nav-link text-white"  href="/logout">Log Out</a>
             </li>
           </ul>
         </div>
@@ -86,7 +104,7 @@ function TodoList() {
       <TodoForm onSubmit={addTodo} />
       <Todo
         todos={todos}
-        completeTodo={completeTodo}
+        // completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
       />

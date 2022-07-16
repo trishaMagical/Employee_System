@@ -26,18 +26,7 @@ const Todo = ({ todos, removeTodo, updateTodo }) => {
   //   return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   // }
   console.log("Todos", todos);
-const handleSave = async() =>{
-  
-    const data = JSON.parse(localStorage.getItem("userInfo"));
-   console.log("data",data);
-    
-    axios
-    .put(`http://localhost:5000/api/todolist/${data.email}`,
- {todolist:JSON.stringify(todos)},
-    )
-    
-    
-}
+
   return <form>
     <div>
     {
@@ -73,7 +62,7 @@ const handleSave = async() =>{
       ))
       
     }
- <button className="button" onClick={handleSave}>Save To DataBase</button>
+ {/* <button className="button" onClick={handleSave}>Save To DataBase</button> */}
   
   </div>
   </form>
