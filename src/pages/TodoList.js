@@ -33,18 +33,18 @@ function TodoList() {
 
     setTodos(newTodos);
     console.log("NewTodos", newTodos);
-    handleSave(newTodos);
+    handleSave(todo);
     console.log(...todos);
 
   };
-const handleSave = async(newTodos) =>{
+const handleSave = async(todo) =>{
   
     const data = JSON.parse(localStorage.getItem("userInfo"));
    console.log("data",data);
     
     axios
-    .put(`http://localhost:5000/api/todolist/${data.email}`,
- {todolist:JSON.stringify(newTodos)},
+    .post(`http://localhost:5000/addtodo/${data.email}`,
+ {todotext:todo.text},
     )
     
     
