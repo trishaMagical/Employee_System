@@ -7,35 +7,37 @@ import "./Todo.css";
 function TodoList() {
   const [todos, setTodos] = useState([]);
   useEffect  (  ()=>{
+   
     const data = JSON.parse(localStorage.getItem("userInfo"));
     console.log("data",data);
     axios
     .get(`http://localhost:5000/api/todoSaved/${data.email}`)
     .then(response => {
-      console.log("response",response.data[0].todolist);
-      // console.log("response",response.data, JSON.parse(response.data));
-      setTodos(JSON.parse(response.data[0].todolist));
+      console.log("response",response.data);
+      // console.log("response",response.data, JSON.pa]]rse(response.data));
+      
+      setTodos(response.data);
 
     })
      .catch(err=>{
         console.log(err);
     })
     
-
    
 },0)
-  const addTodo = (todo) => {
+  
+  const addTodo =  (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
-
+    
     const newTodos = [todo, ...todos];
 
     setTodos(newTodos);
     console.log("NewTodos", newTodos);
     handleSave(todo);
     console.log(...todos);
-
+    window.location='/TodoList';
   };
 const handleSave = async(todo) =>{
   
@@ -49,23 +51,33 @@ const handleSave = async(todo) =>{
     
     
 }
-  const updateTodo = async (todoId, newValue) => {
+  const updateTodo = async (id, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
+     
     }
-
+    axios
+    .put(`http://localhost:5000/updatetodo/${id}`,
+    {todotext:newValue},
+    )
     setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
+      prev.map((item) => (item.id === id ? newValue : item))
     );
+    console.log("NewValue", newValue);
   console.log("Todos123",todos);
   //await handleSave();
+  window.location='/TodoList';
   };
 
-  const removeTodo = (id) => {
+  const removeTodo = async(id) => {
+    console.log("ID",id);
     const removedArr = [...todos].filter((todo) => todo.id !== id);
-    
+    axios
+    .get(`http://localhost:5000/deletetodo/${id}`,
+ 
+    )
     setTodos(removedArr);
-    handleSave(removedArr);
+    // handleSave(removedArr);
   };
 
   const completeTodo = (id) => {

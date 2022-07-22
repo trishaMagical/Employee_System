@@ -4,7 +4,7 @@ import "./Todo.css";
 
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
-
+// console.log("PROPS",props );
   const inputRef = useRef(null);
 
   useEffect(() => {

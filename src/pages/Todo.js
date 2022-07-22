@@ -16,7 +16,9 @@ const Todo = ({ todos, removeTodo, updateTodo }) => {
   });
 
   const submitUpdate = (value) => {
-    updateTodo(edit.id, value);
+    console.log("Value", value);
+    console.log("edit.id",edit.id);
+    updateTodo(edit.id, value.todotext);
     setEdit({
       id: null,
       value: ""
@@ -34,7 +36,7 @@ const Todo = ({ todos, removeTodo, updateTodo }) => {
       todos.map((todo, index) => (
         <React.Fragment>
           {edit.id && edit.id === todo.id ?
-            <TodoForm edit={edit} onSubmit={submitUpdate}
+            <TodoForm edit={edit} onSubmit={()=>submitUpdate(todo)}
               data={todos}
 
             />
@@ -44,7 +46,7 @@ const Todo = ({ todos, removeTodo, updateTodo }) => {
               key={index}
             >
               <div key={todo.id} >
-                {todo.text}
+                {todo.todotext}
               </div>
               <div className="icons">
                 <RiCloseCircleLine
@@ -52,7 +54,7 @@ const Todo = ({ todos, removeTodo, updateTodo }) => {
                   className="delete-icon"
                 />
                 <TiEdit
-                  onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                  onClick={() => setEdit({ id: todo.id, value: todo.text }) }
                   className="edit-icon"
                 />
               </div>
