@@ -50,8 +50,9 @@ const Home = () => {
               <Link className="nav-link text-white" to="/Home">Profile </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white" href="/TodoList">Todo's</a>
+              <a className="nav-link text-white" href="/Categories">Categoris</a>
             </li>
+            
             <li className="nav-item">
               <a className="nav-link text-white" href="/logout">Log Out</a>
             </li>

@@ -3,11 +3,13 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import AddEdit from "./pages/AddEdit";
+// import Categories from "./pages/Categories";
 import Home from "./pages/Home"
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import SignUp from "./pages/SignUp";
-import TodoList from "./pages/TodoList";
+import Categories from "./pages/Categories";
+import TodoList from "./pages/Categories";
 
 function App() {
   
@@ -20,6 +22,7 @@ function App() {
           <Route exact path="/" component={Registration} />
           <Route exact path="/SignUp" component ={SignUp} />
           <Route exact path="/login/user" component={Login} />
+          <Route exact path="/Categories" component={Categories} />
           <Route exact path="/TodoList" component={TodoList} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/addupdate" component={AddEdit} />
