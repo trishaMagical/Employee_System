@@ -22,8 +22,14 @@ export default class TodoList extends Component {
     let { data: post } = await axios
       .get(`http://localhost:5000/categorytodo/${data.email}`)
 
-    console.log("Data.post", post);
+    console.log("post", post);
     this.setState({ data: post })
+    // .then(res=>{
+    //   console.log("value",res.datam[0].email);
+    //   console.log("value",res.datam[0].categoryname);
+    //   localStorage.setItem("post",JSON.stringify(res.datam[0]))
+    // })
+   
   }
   addCategory = async () => {
     console.log("Trisha", this.state.input);
@@ -147,8 +153,8 @@ axios
             </div>
             <div>
               
-            <Link to="/Todo">
-          <button>click</button>
+            <Link to={"/Todo?categoryname="+val.categoryname}  >
+          <button >click</button>
         </Link>
              
               

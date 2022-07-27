@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios";
-
+import categories from "./Categories"
+// import {useLocation} from "react-router-dom";
 export default class Todo extends Component {
     state = {
         input: "",
@@ -9,17 +10,25 @@ export default class Todo extends Component {
         update:""
     }
     async componentDidMount() {
+      
+        const query = new URLSearchParams(this.props.location.search);
+      let categoryname=  query.get("categoryname")
+        console.log("categoryname", categoryname);
 
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
-
+        
         let { data: post } = await axios
-            .get(`http://localhost:5000/alltodo/${data.email}/travelling`)
+            .get(`http://localhost:5000/alltodo/${data.email}/${categoryname}`)
 
         console.log("Data.post", post);
         this.setState({ data: post })
+       
     }
     addTodo = async () => {
+        const query = new URLSearchParams(this.props.location.search);
+        let categoryname=  query.get("categoryname")
+          console.log("categoryname", categoryname);
 
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
@@ -28,12 +37,12 @@ export default class Todo extends Component {
         // console.log("categoryname",categoryname);
 
         axios
-            .post(`http://localhost:5000/addtodo/${data.email}/travelling`,
+            .post(`http://localhost:5000/addtodo/${data.email}/${categoryname}`,
                 { todotext: this.state.input },
-
-                window.location = "/Todo"
+                window.location = "Todo?categoryname="+categoryname
+                
             )
-
+                 
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
@@ -45,6 +54,9 @@ export default class Todo extends Component {
       }
     
   editTodo = async(id) => {
+    const query = new URLSearchParams(this.props.location.search);
+    let categoryname=  query.get("categoryname")
+      console.log("categoryname", categoryname);
     console.log("Idddd", id);
     let data=[...this.state.data]
     let obj = data.find(s1=>s1.id===id)
@@ -56,7 +68,7 @@ export default class Todo extends Component {
            
           )
           this.setState({Index:-1})
-          window.location = "/Todo"
+          window.location = "Todo?categoryname="+categoryname  
       }
       handleEditChange = (e,id) =>{
         let data=[...this.state.data]
@@ -70,14 +82,17 @@ export default class Todo extends Component {
        this.setState({data})
       }
     deleteTodo = async (id) => {
+        const query = new URLSearchParams(this.props.location.search);
+        let categoryname=  query.get("categoryname")
+          console.log("categoryname", categoryname);
 
         console.log("ABCDRtyxse", id);
         axios
             .get(`http://localhost:5000/deletetodo/${id}`,
 
-                window.location = "/Todo"
+            window.location = "Todo?categoryname="+categoryname   
             )
-
+           
     }
     
     render() {

@@ -21,7 +21,7 @@ const loginSubmit = async(e) =>{
     console.log(res.data[0].email);
     console.log(res.data[0].first_name);
     localStorage.setItem("userInfo", JSON.stringify(res.data[0]));
-   window.location='/TodoList';
+   window.location='/Categories';
     
     }).catch(err=>{
         console.log(err);
