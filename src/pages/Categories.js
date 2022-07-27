@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import {Link} from 'react-router-dom'
+ import Todo from "./Todo"
 
 export default class TodoList extends Component {
   state = {
@@ -42,26 +43,38 @@ export default class TodoList extends Component {
     this.setState({ edit:id })
   }
 
-  editCategory = (id) => {
-console.log("zyxvw");
-    axios
+  editCategory = async(id) => {
+console.log("Idddd", id);
+let data=[...this.state.data]
+let obj = data.find(s1=>s1.id===id)
+console.log("id", id);
+
+axios
       .put(`http://localhost:5000/updatecategory/${id}`,
+        { categoryname: obj.categoryname }
+       
+      )
+      this.setState({Index:-1})
       window.location = "/Categories"
-    )
   }
-  deleteCategory = async (id) => {
-    console.log("ABCDRtyxse");
+  deleteCategory = async (categoryname) => {
+    
+    console.log("ABCDRtyxse", categoryname);
     axios
-      .get(`http://localhost:5000/deletecategory/${id}`,
+      .get(`http://localhost:5000/deletecategory/${categoryname}`,
 
         window.location = "/Categories"
       )
 
   }
-  handleChange = (e,id) =>{
-    let ind= this.state.data.findIndex(s1=>s1.id== id)
-    let data=[...this.State.data]
-    let obj= data[ind].categoryname=e.target.value
+  handleEditChange = (e,id) =>{
+    let data=[...this.state.data]
+    console.log("Dataabcdfjhgj", data);
+    let ind= data.findIndex(s1=>s1.id===id)
+    console.log("Index", ind,id);
+    let obj= data[ind]
+    obj["categoryname"]= e.target.value
+    console.log("OBJ", obj);
     data[ind]=obj
    this.setState({data})
   }
@@ -82,7 +95,6 @@ console.log("zyxvw");
               <li className="nav-item ">
                 <a className="nav-link text-white" href="/Categories">Categories</a>
               </li>
-
               <li className="nav-item ms-auto">
                 <a className="nav-link text-white" href="/logout">Log Out</a>
               </li>
@@ -98,6 +110,7 @@ console.log("zyxvw");
           onChange={this.handleChange}
           value={this.state.input}
         />
+        
         <button onClick={this.addCategory} className="todo-button">
           Add todo
         </button>
@@ -116,7 +129,7 @@ console.log("zyxvw");
                   placeholder="Update a todo"
                   name="text"
                   className="todo-input"
-                  onChange={()=>this.handleChange(val.id)}
+                  onChange={(e)=>this.handleEditChange(e,val.id)}
                  
                 /> 
                 <button onClick={()=>this.editCategory(val.id)}>Save</button>
@@ -130,12 +143,12 @@ console.log("zyxvw");
              
             </div>
             <div>
-              <button onClick={() => this.deleteCategory(val.id)}>Delete</button>
+              <button onClick={() => this.deleteCategory(val.categoryname)}>Delete</button>
             </div>
             <div>
               
-            <Link to ="/TodoList">
-            <input type="button" value="Go Back"/>
+            <Link to="/Todo">
+          <button>click</button>
         </Link>
              
               

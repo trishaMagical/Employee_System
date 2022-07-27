@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import SignUp from "./pages/SignUp";
 import Categories from "./pages/Categories";
-import TodoList from "./pages/Categories";
+import Todo from "./pages/Todo";
 
 function App() {
   
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/SignUp" component ={SignUp} />
           <Route exact path="/login/user" component={Login} />
           <Route exact path="/Categories" component={Categories} />
-          <Route exact path="/TodoList" component={TodoList} />
+          <Route exact path="/Todo" component={Todo} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/addupdate" component={AddEdit} />
           <Route exact path="/SignUp" component ={SignUp} />
