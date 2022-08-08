@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import axios from "axios";
-import {Link} from 'react-router-dom'
- import Todo from "./Todo"
+import { Link } from 'react-router-dom'
+import "./Categories.css"
+
 
 export default class TodoList extends Component {
   state = {
     input: "",
     data: [],
     edit: -1,
-    update:""
+    update: ""
   }
   handleChange = (e) => {
     this.setState({ input: e.target.value });
@@ -29,7 +30,7 @@ export default class TodoList extends Component {
     //   console.log("value",res.datam[0].categoryname);
     //   localStorage.setItem("post",JSON.stringify(res.datam[0]))
     // })
-   
+
   }
   addCategory = async () => {
     console.log("Trisha", this.state.input);
@@ -44,27 +45,27 @@ export default class TodoList extends Component {
 
 
   }
-  edit = (id)=>{
+  edit = (id) => {
     console.log("id", id);
-    this.setState({ edit:id })
+    this.setState({ edit: id })
   }
 
-  editCategory = async(id) => {
-console.log("Idddd", id);
-let data=[...this.state.data]
-let obj = data.find(s1=>s1.id===id)
-console.log("id", id);
+  editCategory = async (id) => {
+    console.log("Idddd", id);
+    let data = [...this.state.data]
+    let obj = data.find(s1 => s1.id === id)
+    console.log("id", id);
 
-axios
+    axios
       .put(`http://localhost:5000/updatecategory/${id}`,
         { categoryname: obj.categoryname }
-       
+
       )
-      this.setState({Index:-1})
-      window.location = "/Categories"
+    this.setState({ Index: -1 })
+    window.location = "/Categories"
   }
   deleteCategory = async (categoryname) => {
-    
+
     console.log("ABCDRtyxse", categoryname);
     axios
       .get(`http://localhost:5000/deletecategory/${categoryname}`,
@@ -73,16 +74,16 @@ axios
       )
 
   }
-  handleEditChange = (e,id) =>{
-    let data=[...this.state.data]
+  handleEditChange = (e, id) => {
+    let data = [...this.state.data]
     console.log("Dataabcdfjhgj", data);
-    let ind= data.findIndex(s1=>s1.id===id)
-    console.log("Index", ind,id);
-    let obj= data[ind]
-    obj["categoryname"]= e.target.value
+    let ind = data.findIndex(s1 => s1.id === id)
+    console.log("Index", ind, id);
+    let obj = data[ind]
+    obj["categoryname"] = e.target.value
     console.log("OBJ", obj);
-    data[ind]=obj
-   this.setState({data})
+    data[ind] = obj
+    this.setState({ data })
   }
   render() {
 
@@ -107,61 +108,16 @@ axios
             </ul>
           </div>
         </nav>
-        <h1>What's the plan for Today</h1>
-        <input
-          placeholder="Add a todo"
-          name="text"
-          className="todo-input"
-
-          onChange={this.handleChange}
-          value={this.state.input}
-        />
-        
-        <button onClick={this.addCategory} className="todo-button">
-          Add todo
-        </button>
-        {this.state.data.map((val, index) =>
-          <div key={index}>
-
-            {val.categoryname}
-
-            <div>
-              <button onClick={()=>this.edit(val.id)}>Edit</button>
-              {
-                val.id === this.state.edit ?
-                <div>
-                 <input
-                value={val.categoryname}
-                  placeholder="Update a todo"
-                  name="text"
-                  className="todo-input"
-                  onChange={(e)=>this.handleEditChange(e,val.id)}
-                 
-                /> 
-                <button onClick={()=>this.editCategory(val.id)}>Save</button>
-                </div>
-
-                :
-                <div>
-                 </div>
-                
-              }
-             
-            </div>
-            <div>
-              <button onClick={() => this.deleteCategory(val.categoryname)}>Delete</button>
-            </div>
-            <div>
-              
-            <Link to={"/Todo?categoryname="+val.categoryname}  >
-          <button >click</button>
-        </Link>
-             
-              
-            </div>
-          </div>
-
-        )}
+        <div className='firstContainer'>
+          <h1 className='labelContainer'>What's the plan for Today</h1>
+          <input
+            placeholder="Add a todo"
+            name="text"
+            className="todo-inputAdd"
+            onChange={this.handleChange}
+            value={this.state.input}
+          />
+        </div>
 
       </>
     )

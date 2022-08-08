@@ -1,0 +1,17 @@
+:root{
+    --colorValue:brown;
+    --fontstyleValue:Georgia, 'Times New Roman', Times, serif;
+  }
+  .firstContainer{
+    margin-top: 100px;
+  }
+  .labelContainer{
+    color: var(--colorValue);
+    font-family: var(--fontstyleValue) ;
+    font-weight: bold;
+  }
+  .todo-inputAdd{
+    width: 20%;
+    height: 39px;
+    margin-top: 2px;
+}
