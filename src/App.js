@@ -19,7 +19,7 @@ function App() {
       
         {/* <ToastContainer position="top-center"/> */}
         <Switch>
-          <Route exact path="/" component={Registration} />
+          {/* <Route exact path="/" component={Registration} /> */}
           <Route exact path="/SignUp" component ={SignUp} />
           <Route exact path="/login/user" component={Login} />
           <Route exact path="/Categories" component={Categories} />
@@ -31,7 +31,7 @@ function App() {
           
           
           
-          <Redirect to="/Home" />
+          <Redirect to="/SignUp" />
           
         </Switch>
       </div>
