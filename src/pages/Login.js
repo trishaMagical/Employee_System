@@ -30,49 +30,53 @@ const loginSubmit = async(e) =>{
 }
 
   return (
-     <div>
-    <form style={{
-            margin:"auto",
-            padding:"15px",
-            maxWidth:"400px",
-            alignContent:"center"
-
-    }} 
-    onSubmit={loginSubmit}>
-    <h2>Login Page</h2>    
-    <label className='label-Size'><h3>Email-Id:</h3></label>
-    
-        <input
-        className='inputbox-Size'
+    <div  style={{ marginTop: "100px" }}>
+    <form  className='mainContainer' onSubmit={loginSubmit}>
+      <label className='secondContainer'>Login</label> 
+      <br/>
+      <br/>
+      <br/> 
+      <br/>
+      <input
+        className='inputbox-Style'
         type="email"
         id="email"
         name="email"
         value={email}
-        onChange={(e)=>setEmail(e.target.value)}
-        placeholder="         Your Email Id"
-       />
-       <br/>
-       <br/>
-       
-        <label><h3>Password:</h3></label>
-        
-        <input
-        className='inputbox-Size'
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <br/>
+      <br/>
+      
+      <br/>
+      <input
+        className='inputbox-Style'
         type="password"
         id="password"
         name="password"
         value={password}
-        onChange={(e)=>setPassword(e.target.value)}
-        placeholder="        Your Password"
-      
-        
-        />
-        
-        <input type="submit" value="Login"/>
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+     
+      <input type="submit" value="Login" />
+      <br/>
+      <label>Need an account?</label>
+      <a href='/'>
+          <strong>
+            <label className='signupTextstyle'> SignUp</label>
+          </strong>
+      </a>
+
     </form>
 
 
-    </div>
+  </div>
   )
 }
 
