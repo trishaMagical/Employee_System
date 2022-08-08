@@ -61,9 +61,12 @@ export default class Todo extends Component {
         let data = [...this.state.data]
         let obj = data.find(s1 => s1.id === id)
         console.log("id", id);
+        console.log("Trisha", this.state.input);
+        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("datavalue", datavalue);
 
         axios
-            .put(`http://localhost:5000/updatetodo/${id}`,
+            .put(`http://localhost:5000/updatetodo/${id}/${datavalue.email}`,
                 { todotext: obj.todotext }
 
             )
@@ -81,14 +84,25 @@ export default class Todo extends Component {
         data[ind] = obj
         this.setState({ data })
     }
-    deleteTodo = async (id) => {
+    editCancel = ()=>{
         const query = new URLSearchParams(this.props.location.search);
         let categoryname = query.get("categoryname")
         console.log("categoryname", categoryname);
 
+        window.location =  "Todo?categoryname=" + categoryname
+    }
+    deleteTodo = async (id) => {
+        const query = new URLSearchParams(this.props.location.search);
+        let categoryname = query.get("categoryname")
+        console.log("categoryname", categoryname);
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
+
         console.log("ABCDRtyxse", id);
+
         axios
-            .get(`http://localhost:5000/deletetodo/${id}`,
+            .get(`http://localhost:5000/deletetodo/${id}/${data.email}`,
 
                 window.location = "Todo?categoryname=" + categoryname
             )
@@ -114,23 +128,25 @@ export default class Todo extends Component {
                         </ul>
                     </div>
                 </nav>
-                <div>
-                    <h1>Category Wise Todo</h1>
+                <div className='firstContainer'>
+                    <h1 className='labelContainer'>Category Wise Todo</h1>
                     <input
                         placeholder="Add a todo"
                         name="text"
-                        className="todo-input"
+                        className="todo-inputAdd"
                         value={this.state.input}
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.addTodo} className="todo-button">
+                    <button onClick={this.addTodo} className="btn-add">
                         Add todo
                     </button>
+                    <br/>
+                    <br/>
                     <div className='tableclass'>
                         <table className=" styled-table"  >
-                            <thead>
+                            <thead className="headersStyling">
                                 <tr>
-                                    <th style={{ textAlign: "center" }}>Todo</th>
+                                    <th className='categorylabelStyle'>Todo</th>
 
                                     <th style={{ textAlign: "center" }}>Actions</th>
                                 </tr>
@@ -154,7 +170,9 @@ export default class Todo extends Component {
                                                                 onChange={(e) => this.handleEditChange(e, val.id)}
 
                                                             />
+                                                            <br/>
                                                             <button className="btn-save" onClick={() => this.editTodo(val.id)}>Save</button>
+                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
                                                         </div>
 
                                                         :

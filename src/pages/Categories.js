@@ -16,35 +16,30 @@ export default class TodoList extends Component {
 
   }
   async componentDidMount() {
-
-    const data = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("data", data);
-
-    let { data: post } = await axios
-      .get(`http://localhost:5000/categorytodo/${data.email}`)
-
-    console.log("post", post);
-    this.setState({ data: post })
-    // .then(res=>{
-    //   console.log("value",res.datam[0].email);
-    //   console.log("value",res.datam[0].categoryname);
-    //   localStorage.setItem("post",JSON.stringify(res.datam[0]))
-    // })
-
-  }
-  addCategory = async () => {
     console.log("Trisha", this.state.input);
     const data = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("data", data);
+    console.log("datam", data);
 
-    axios
+    let post = await axios
+        .get(`http://localhost:5000/categorytodo/${data.email}`)
+
+    console.log("post", post.data);
+    this.setState({ data: post.data })
+
+}
+addCategory = async () => {
+  console.log("Trisha", this.state.input);
+  const data = JSON.parse(localStorage.getItem("userInfo"));
+  console.log("data", data);
+
+  axios
       .post(`http://localhost:5000/addcategories/${data.email}`,
-        { categoryname: this.state.input },
-        window.location = "/Categories"
+          { categoryname: this.state.input },
+          window.location = "/Categories"
       )
 
 
-  }
+}
   edit = (id) => {
     console.log("id", id);
     this.setState({ edit: id })
@@ -64,6 +59,13 @@ export default class TodoList extends Component {
     this.setState({ Index: -1 })
     window.location = "/Categories"
   }
+  editCancel = ()=>{
+    const query = new URLSearchParams(this.props.location.search);
+    let categoryname = query.get("categoryname")
+    console.log("categoryname", categoryname);
+
+    window.location =  "/Categories"
+}
   deleteCategory = async (categoryname) => {
 
     console.log("ABCDRtyxse", categoryname);
@@ -96,9 +98,6 @@ export default class TodoList extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link text-white" href="/Home">Profile </a>
-              </li>
               <li className="nav-item ">
                 <a className="nav-link text-white" href="/Categories">Categories</a>
               </li>
@@ -117,6 +116,64 @@ export default class TodoList extends Component {
             onChange={this.handleChange}
             value={this.state.input}
           />
+          <button className="btn-add" onClick={this.addCategory} >
+            Add Category
+          </button>
+          <br/>
+          <br/>
+          <div className='tableclass'>
+            <table className="styled-table" >
+              <thead className='headersStyling'>
+
+                <tr >
+                  <th className='categorylabelStyle'>Category</th>
+
+                  <th style={{ textAlign: "center" }}>Actions</th>
+                </tr>
+
+              </thead>
+              <tbody >
+                {this.state.data.map((val, index) => {
+
+                  return (
+                    <tr >
+                      <td key={index}>
+                        <a className='categoryvalueStyle' href={"/Todo?categoryname=" + val.categoryname}  >
+                          {val.categoryname}
+                        </a>
+                        {
+                          val.id === this.state.edit ?
+                            <div>
+                              <input
+                                value={val.categoryname}
+                                placeholder="Update a CategoryName"
+                                name="text"
+                                className="todo-input"
+                                onChange={(e) => this.handleEditChange(e, val.id)}
+
+                              />
+                              <br/>
+                              <button className="btn-save" onClick={() => this.editCategory(val.id)}>Save</button>
+                              <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+                            </div>
+
+                            :
+                            <div>
+                            </div>
+
+                        }
+                      </td>
+                      <td>
+                        <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
+
+                        <button className="btn-delete" onClick={() => this.deleteCategory(val.categoryname)}>Delete</button>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </>
